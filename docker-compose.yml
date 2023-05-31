@@ -52,6 +52,7 @@ services:
       - HOST=$FRONTEND_HOST
       - PORT=$FRONTEND_PORT
       - BASE_URL=$BASE_URL
+      - WATCHPACK_POLLING=true
     ports:
       - $FRONTEND_PORT:$FRONTEND_PORT
     volumes:
