@@ -4,6 +4,13 @@ Implements a backend server
 # Imports
 import requests
 import re
+from scripts.siga_data_to_db import insert_into_db
+from scripts.courses_list import courses
+from scripts.siga_scraper_class import (
+    siga_curriculum_scraper,
+    siga_grande_scraper
+)
+
 from helpers.utils import (
     connect_db,
     generate_token,
@@ -36,6 +43,30 @@ database = connect_db()
 # Map database tables as classes
 model = automap_base()
 model.prepare(autoload_with=database, reflect=True)
+
+@server.route("/generate-db", methods=["POST"])
+def generate_db():
+    curriculum_scraper = siga_curriculum_scraper()
+    grade_scrapper = siga_grande_scraper()
+    print("Started Scraping")
+    grade_df = grade_scrapper.get_grande_info(courses)
+    print("Finished Grade")
+    subject_info = curriculum_scraper.get_subject_info()   
+    print("Finished Subject Info")
+    print("Generate Scraped Datasets")
+
+    db = insert_into_db(database)
+    subject_df = db.insert_subject(subject_info, grade_df)
+    professor_df = db.insert_professor(grade_df)
+    course_df = db.insert_course(subject_info)
+    teach_df = db.insert_teach(grade_df, professor_df, subject_df, '2023.1')
+    syllabus_df = db.insert_syllabus(subject_info, subject_df, course_df)
+
+    return {
+        'status': 200
+    }
+
+
 
 @server.route("/add-teacher", methods=["POST"])
 def add_teacher():
