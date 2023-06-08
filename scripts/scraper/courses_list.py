@@ -1,4 +1,5 @@
-cursos = [
+# Lista de Cursos Alvo
+courses = [
     ["Administração Tarde e Noite - Praia Vermelha", "FD804294-92A4-F799-634F-A707C86F4A33"],
     ["Arquitetura e Urbanismo - Fundão", "D99CB5BA-92A4-F713-0041-1509CB806191"],
     ["Artes Cênicas Cenografia - Fundão", "810B1869-92A4-F79A-7EF3-0FCE4A954AC1"],

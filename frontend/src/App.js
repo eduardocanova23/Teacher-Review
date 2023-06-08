@@ -1,11 +1,9 @@
 import './App.css';
-
+import ReviewForm from './components/ReviewForm'
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        Teste6
-      </header>
+      <ReviewForm></ReviewForm>
     </div>
   );
 }
