@@ -14,14 +14,22 @@
 }
 
 .App-header {
+<<<<<<< HEAD:frontend/src/App.css
   background-color: #fbfee3;
+=======
+  background-color: #F5F5F5;
+>>>>>>> maria:frontend/src/css/App.css
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
+<<<<<<< HEAD:frontend/src/App.css
   color: rgb(0, 0, 0);
+=======
+  color: 000000;
+>>>>>>> maria:frontend/src/css/App.css
 }
 
 .App-link {
