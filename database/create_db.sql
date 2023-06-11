@@ -15,7 +15,8 @@ CREATE TABLE "Professor"(
     "metric3" DOUBLE PRECISION NULL,
     "metric4" DOUBLE PRECISION NULL,
     "metric5" DOUBLE PRECISION NULL,
-    "metric6" DOUBLE PRECISION NULL
+    "metric6" DOUBLE PRECISION NULL,
+    "cnt_review" INTEGER NULL
 );
 ALTER TABLE
     "Professor" ADD PRIMARY KEY("professor_id");

@@ -1,33 +1,26 @@
 import React from "react";
 import TextField from '@mui/material/TextField';
 import RateSlider from "./RateSlider";
+import SubmitForm from "./SubmitForm";
+
 import json_feed from '../constants/feedbacks.json'
-import { useProfessors } from "./hooks/useProfessors";
 import { FormControl, Autocomplete} from '@mui/material';
+import { useProfessor } from "./hooks/useProfessor";
+import { useSubject } from "./hooks/useSubject";
+import { useSubjectList } from "./hooks/useSubjectList";
+
+import { useProfessorList } from "./hooks/useProfessorLists";
+import { useRate } from "./hooks/useRate";
+import { useDescription } from "./hooks/useDescription";
 
 const ReviewForm = () => {
-    const {inputProfessor, handleProfessorInput} = useProfessors()
-    const [inputSubject, setSubject] = React.useState("");
-    const [inputDescription, setDescription] = React.useState("");
-    const [inputRate, setRate] = React.useState({
-        "Pontualidade": 0,
-        "Organização": 0,
-        "Assiduidade": 0,
-        "Didática": 0,
-        "Nível de Mamata": 0
-    });
-
-    const handleRateInput = (event, newValue) => {
-        let newRateInput = {
-            ...inputRate, 
-        }
-        newRateInput[event.target.name] = newValue
-        setRate(newRateInput)
-    }
-    const professors = {
-        'daniel':['a', 'b', 'c']
-    }
-
+    const {inputProfessor, handleProfessorInput} = useProfessor();
+    const {inputSubject, handleSubjectInput} = useSubject();
+    const {professorsList} = useProfessorList();
+    const {subjectList, handleSubjectList} = useSubjectList();
+    const {inputDescription, handleDescriptionInput} = useDescription()
+    const {inputRate, handleRateInput} = useRate() 
+    
     const styles = {
         form_div: {
             display: 'flex', 
@@ -37,59 +30,75 @@ const ReviewForm = () => {
         }
     }
 
-    const handleSubjectInput = (event, newValue) => {
-        setSubject(newValue);
-        console.log(newValue)
-    }
 
+    const rates_list = []
+    Object.keys(json_feed).forEach( (crit) => {
+        rates_list.push(
+        <div style={styles.form_div}>
+        <RateSlider 
+            input={inputRate} 
+            set={handleRateInput}
+            name={crit}
+            feedbacks={json_feed[crit]}
+        /></div>);
+    });
 
     return (
-        <div className="Form" >
+        <div className="Form" style={{padding:20}}>
             <h1>Faça uma avaliação!</h1>
             <FormControl style={{width: '70%'}}>
                 <div style={styles.form_div}>
                     <Autocomplete
+                        isOptionEqualToValue={(option, value) => option.id === value.id}
                         value={inputProfessor}
-                        onChange={handleProfessorInput}
-                        options={Object.keys(professors)}
+                        onChange={(event, newValue) => {
+                            handleProfessorInput(newValue)
+                            handleSubjectList(newValue)
+                        }}
+                        options={professorsList.length > 0? professorsList : []}
+                        loading={professorsList.length > 0? false : true}
+                        loadingText="Loading..."
                         sx={{ width: '100%', mr: 1}}
                         renderInput={(params) => <TextField {...params} label="Selecione um professor" />}
                     />
                     
                     <Autocomplete
+                        isOptionEqualToValue={(option, value) => option.id === value.id}
                         value={inputSubject}
                         onChange={handleSubjectInput}
                         disabled={inputProfessor? false : true}
-                        options={professors[inputProfessor]? professors[inputProfessor] : []}
+                        options={subjectList.length > 0? subjectList : []}
+                        loading={subjectList.length > 0? false : true}
+                        loadingText="Loading..."
                         sx={{ width: '100%', ml: 1}}
                         renderInput={(params) => <TextField {...params} label="Selecione uma disciplina" />}
                     />
                 
                 </div>
+             
+                {rates_list}
+
                 <div style={styles.form_div}>
 
-                 <TextField
+                    <TextField
                     error={inputDescription.length > 250? true : false}
                     helperText="A descrição deve ter menos que 250 palavras"
-                    onChange={(event) => {
-                        setDescription(event.target.value)
-                    }}
+                    onChange={handleDescriptionInput}
                     value={inputDescription}
                     id="outlined-multiline-flexible"
                     label="Quais os motivos da sua avaliação?"
                     multiline
                     sx={{ width: '100%', height: '50%'}}
                     rows={4}
-                />
-                </div>
-                <div style={styles.form_div}>
-                    <RateSlider 
-                        input={inputRate} 
-                        set={handleRateInput}
-                        name="Pontualidade"
-                        feedbacks={json_feed['Pontualidade']}
                     />
-    
+                </div>
+                <div>
+                   <SubmitForm inputs={{
+                     "Professor": inputProfessor,
+                     "Disciplina": inputSubject,
+                     "Notas": inputRate,
+                     "Descrição": inputDescription
+                   }}></SubmitForm>
                 </div>
             </FormControl>
         </div>
