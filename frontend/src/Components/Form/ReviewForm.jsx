@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import RateSlider from "./RateSlider";
 import SubmitForm from "./SubmitForm";
 
-import json_feed from '../constants/feedbacks.json'
+import json_feed from './constants/feedbacks.json'
 import { FormControl, Autocomplete} from '@mui/material';
 import { useProfessor } from "./hooks/useProfessor";
 import { useSubject } from "./hooks/useSubject";
