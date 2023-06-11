@@ -1,0 +1,18 @@
+{
+    "Pontualidade": [
+        "Às vezes aparece",
+        "Sempre atrasado/a",
+        "Atrasado/a na maior parte do tempo",
+        "Atrasos razoáveis",
+        "Pontual como deveria",
+        "Desnecessariamente pontual"
+    ],
+    "Organização": [
+        "Totalmente perdido",
+        "Não possui nada planejado",
+        "Planejamento fraco",
+        "Levemente organizado/a",
+        "Organização adequada",
+        "Ótimo planejamento"
+    ]
+}
