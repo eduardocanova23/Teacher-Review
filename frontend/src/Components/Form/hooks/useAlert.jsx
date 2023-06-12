@@ -13,8 +13,9 @@ export const useAlert = () => {
 
     const handleAlert = (inputs) => {
         const alertObj = {'severity': 'warning'}
+        console.log(inputs)
         const check = Object.keys(inputs).every((key) => {
-            if (inputs[key] === "") {
+            if (!inputs[key]) {
                 alertObj['message'] = `Você deve preencher o campo ${key}`
                 return false
             }
