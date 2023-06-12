@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export const useSubjectList = () => {
     const [subjectList, setSubjectList] = React.useState([]);
-
+   
     const handleSubjectList = async (newValue) => {
         if(newValue){
             const response = await axios.post(
@@ -14,13 +14,16 @@ export const useSubjectList = () => {
                     "id": newValue["id"]
                 }
             )
-            const subjects = response["data"]["subjects"].map((subj) => {
-                return {
-                    "label": subj.name,
-                    "id": subj.id
-                }
-            })
-            setSubjectList(subjects)
+            if (response.status == 200) {
+                const subjects = response["data"]["subjects"].map((subj) => {
+                    return {
+                        "label": subj.name,
+                        "id": subj.id,
+                        "teach_id": subj.teach_id
+                    }
+                })
+                setSubjectList(subjects)
+            }
         }
     };
 

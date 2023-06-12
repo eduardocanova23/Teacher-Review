@@ -21,6 +21,7 @@ const ReviewForm = () => {
     const {inputDescription, handleDescriptionInput} = useDescription()
     const {inputRate, handleRateInput} = useRate() 
     
+
     const styles = {
         form_div: {
             display: 'flex', 
@@ -49,11 +50,11 @@ const ReviewForm = () => {
             <FormControl style={{width: '70%'}}>
                 <div style={styles.form_div}>
                     <Autocomplete
-                        isOptionEqualToValue={(option, value) => option.id === value.id}
                         value={inputProfessor}
                         onChange={(event, newValue) => {
                             handleProfessorInput(newValue)
                             handleSubjectList(newValue)
+                            handleSubjectInput("")
                         }}
                         options={professorsList.length > 0? professorsList : []}
                         loading={professorsList.length > 0? false : true}
@@ -63,7 +64,6 @@ const ReviewForm = () => {
                     />
                     
                     <Autocomplete
-                        isOptionEqualToValue={(option, value) => option.id === value.id}
                         value={inputSubject}
                         onChange={handleSubjectInput}
                         disabled={inputProfessor? false : true}

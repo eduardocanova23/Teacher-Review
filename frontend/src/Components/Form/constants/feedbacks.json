@@ -14,5 +14,29 @@
         "Levemente organizado/a",
         "Organização adequada",
         "Ótimo planejamento"
+    ],
+    "Assiduidade": [
+        "Muito gente boa",
+        "Educado e disposto a ajudar",
+        "Suportável",
+        "Comportamento inadequados",
+        "Extremamente mau humorado",
+        "Impossível convivência"
+    ],
+    "Didática": [
+        "Não dá pra entender uma palavra",
+        "Conteúdo passado de forma confusa",
+        "Deixa a desejar",
+        "Se esforça para passar o conteúdo",
+        "Explicações boa ",
+        "Dá para aprender qualquer coisa com ele/ela"
+    ],
+    "Nível de Mamata": [
+        "Definição de carrasco: impossível de passar",
+        "Alguns passam, outros...",
+        "O sofrimento na matéria é garantido",
+        "Cobra muito, mas é possível passar se esfornçando",
+        "Cobrança tranquila",
+        "Impossível reprovar"
     ]
 }

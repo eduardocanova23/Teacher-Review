@@ -1,35 +1,14 @@
 import React, { useEffect, useState } from "react";
-import {Stack, Alert, Button } from '@mui/material';
+import {Stack, Alert  } from '@mui/material';
+import { useAlert } from "./hooks/useAlert";
+import { LoadingButton } from '@mui/lab';
+
 const RateSlider = (props) => {
-    const [alert, setAlert] = useState({
-        'message': "",
-        'severity': ""
-    })
-    
-    const handleSubmit = (inputs) => {
-        
-    }
-    const checkSubmit = (inputs) => {
-        let alertObj = {
-            'message': `Submissão feita com sucesso`,
-            'severity': 'success'
-        }
-        const check = Object.keys(inputs).every((key) => {
-            if(inputs[key] === ""){
-                alertObj = {
-                    'message': `Você deve preencher o campo ${key}`,
-                    'severity': 'warning'
-                }
-                return false
-            }
-            return true
-        })
-        if(check){
-            handleSubmit(inputs)
-            setAlert(alertObj)
-        } else {
-            setAlert(alertObj)
-        }
+    const  { alert, handleSubmit, handleAlert } = useAlert();
+    const handleBtnClick = () => {
+        const check = handleAlert(props.inputs)
+        if (!check) return
+        const status = handleSubmit(props.inputs,  props.clean)
     }
     return (
         <>  
@@ -37,9 +16,9 @@ const RateSlider = (props) => {
                     {alert['message']? <Alert style={{width: '70%', margin: 10}}  variant="outlined" severity={alert['severity']}>
                         {alert['message']}
                     </Alert > : <></>}
-                    <Button  variant="contained"  style={{width: '60%', margin: 10}} onClick={() => checkSubmit(props.inputs)}>
+                    <LoadingButton  loading={alert["loading"]} variant="contained"  style={{width: '60%', margin: 10}} onClick={handleBtnClick}>
                         Submeter
-                    </Button>
+                    </LoadingButton >
                 </Stack>
             
         </>

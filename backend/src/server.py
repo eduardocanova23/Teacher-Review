@@ -69,28 +69,11 @@ def generate_db():
         'status': 200
     }
 
-
-@server.route("/add-teacher", methods=["POST"])
-def add_teacher():
+@server.route("/get-teacher-by-id", methods=["POST"])
+def get_teacher_by_id():
     request_data =  request.json
-    with Session(database) as session:
-        try:
-            session.add(
-                model.classes.Professor(
-                    professor_name=request_data['name'],
-                    professor_m1=request_data['m1'],
-                    professor_m2=request_data['m2'],
-                    professor_m3=request_data['m3']
-                )
-            )
-        except:
-            session.rollback()
-            raise
-        else:
-            session.commit()
-    return {
-        "status": 200
-    }
+    teacher = teacher_info(request_data['id'])
+    return teacher
 
 @server.route("/get-all-teachers", methods=["GET"])
 def get_teachers():
@@ -151,81 +134,85 @@ def get_professors_subjects():
         "subjects": subjects_list
     }
 
-# @server.route("/update-professor", methods=["GET"])
-# def update_professor():
-#     professor_table = model.classes.Professor
-#     teach_table = model.classes.Teach
-#     review_table = model.classes.Review
-    
-#     with Session(database) as session:
-#         try:
-#             results = session.query(
-#                 professor_table.professor_id,
-#                 review_table.review_id,
-#                 review_table.metric1,
-#                 review_table.metric2,
-#                 review_table.metric3,
-#                 review_table.metric4,
-#                 review_table.metric5
-#             ).join(teach_table, teach_table.professor_id == professor_table.professor_id
-#             ).join(review_table, review_table.teach_id == teach_table.teach_id).all()
-#         except:
-#             session.rollback()
-#             raise
-#         else:
-#             session.commit()
-    
-#         samples = [{
-#             'professor_id': sample.professor_id,
-#             'review_id': sample.review_id,
-#             'metric1': sample.metric1,
-#             'metric2': sample.metric2,
-#             'metric3': sample.metric3,
-#             'metric4': sample.metric4,
-#             'metric': sample.metric5
-#         } for sample in results]
-#         professor_df = pd.Datafram(samples)
-#         print(professor_df)
-#     return {
-#         'results': samples
-#     }
 
-# @server.route("/add-review", methods=["POST"])
-# def add_review():
-#     request_data =  request.json
-#     professor_table = model.classes.Professor
-#     ts = time.time()
-#     with Session(database) as session:
-#         try:
-#             session.add(
-#                 model.classes.Review(
-#                     teach_id=request_data['teach_id'],
-#                     description=request_data['description'],
-#                     metric1=request_data['m1'],
-#                     metric2=request_data['m2'],
-#                     metric3=request_data['m3'],
-#                     metric4=request_data['m4'],
-#                     metric5=request_data['m5'],
-#                     report_time=func.to_timestamp(ts)
-#                 )
-#             )
-#         except:
-#             session.rollback()
-#             raise
-#         else:
-#             session.commit()
+@server.route("/add-review", methods=["POST"])
+def add_review():
+    request_data =  request.json
+    ts = time.time()
+    teacher = teacher_info(request_data['professor_id'])
 
-#         try:
-#             session.query(
-#                 professor_table
-#             ).filter(
-#                 professor_tableprofessor_id == request_data["professor_id"]
-#             ).update({
-#                 professor_table.metric1 = 
-#             })
-        
-#     return {
-#         "Insert Review": 200
-#     }
+    if teacher["cnt_review"]:
+        update_info = {
+            "metric1": ((teacher['metric1']*teacher['cnt_review']) + request_data['m1'])/(teacher['cnt_review']+1),
+            "metric2": ((teacher['metric2']*teacher['cnt_review']) + request_data['m2'])/(teacher['cnt_review']+1),
+            "metric3": ((teacher['metric3']*teacher['cnt_review']) + request_data['m3'])/(teacher['cnt_review']+1),
+            "metric4": ((teacher['metric4']*teacher['cnt_review']) + request_data['m4'])/(teacher['cnt_review']+1),
+            "metric5": ((teacher['metric5']*teacher['cnt_review']) + request_data['m5'])/(teacher['cnt_review']+1),
+            "cnt_review": teacher['cnt_review'] + 1
+        }
+    else: 
+        update_info = {
+            "metric1": request_data['m1'],
+            "metric2": request_data['m2'],
+            "metric3": request_data['m3'],
+            "metric4": request_data['m4'],
+            "metric5": request_data['m5'],
+            "cnt_review": 1
+        }
+    with Session(database) as session:
+        try:
+            session.add(
+                model.classes.Review(
+                    teach_id=request_data['teach_id'],
+                    description=request_data['description'],
+                    metric1=request_data['m1'],
+                    metric2=request_data['m2'],
+                    metric3=request_data['m3'],
+                    metric4=request_data['m4'],
+                    metric5=request_data['m5'],
+                    report_time=func.to_timestamp(ts)
+                )
+            )
+            session.query(
+                model.classes.Professor
+            ).filter(
+                model.classes.Professor.professor_id == request_data['professor_id']
+            ).update(update_info)
+        except:
+            session.rollback()
+            raise
+        else:
+            session.commit()
 
 
+    return {
+        "update-professor": request_data['professor_id']
+    }
+ 
+
+
+
+def teacher_info(id):
+    professor_table = model.classes.Professor
+    with Session(database) as session:
+        try:
+            result = session.query(
+                professor_table
+            ).filter(
+                professor_table.professor_id == id
+            ).first()
+        except:
+            session.rollback()
+            raise
+        else:
+            session.commit()
+        teacher = {
+            'professor_id': result.professor_id,
+            'metric1': result.metric1,
+            'metric2': result.metric2,
+            'metric3': result.metric3,
+            'metric4': result.metric4,
+            'metric5': result.metric5,
+            'cnt_review': result.cnt_review
+        }
+    return teacher

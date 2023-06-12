@@ -10,13 +10,15 @@ export const useProfessorList = () => {
         const response = await axios.get(
             config.api_url + '/get-all-teachers'
         )
-        const profs = response["data"]["teacher-list"].map((prof) => {
-            return {
-                "label": prof.name,
-                "id": prof.id
-            }
-        })
-        setProfessorList(profs)
+        if (response.status == 200){
+            const profs = response["data"]["teacher-list"].map((prof) => {
+                return {
+                    "label": prof.name,
+                    "id": prof.id
+                }
+            })
+            setProfessorList(profs)
+        }
     };
 
     useEffect(() => {
