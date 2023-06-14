@@ -134,6 +134,36 @@ def get_professors_subjects():
         "subjects": subjects_list
     }
 
+@server.route("/get-teacher-review", methods=["POST"])
+def get_professors_subjects():
+    request_data =  request.json
+    subject_table = model.classes.Subject
+    teach_table = model.classes.Teach
+    subjects_list = []
+    with Session(database) as session:
+        try:
+            results = session.query(
+                subject_table.subject_id,
+                subject_table.name,
+                teach_table.teach_id
+            ).join(teach_table, subject_table.subject_id ==  teach_table.subject_id
+            ).filter(teach_table.professor_id == request_data['id']).all()
+        except:
+            session.rollback()
+            raise
+        else:
+            session.commit()
+        
+        for sample in results:
+            subjects_list.append({
+                'id': sample.subject_id,
+                'teach_id': sample.teach_id,
+                'name': sample.name
+            })
+    return {
+        "subjects": subjects_list
+    }
+
 
 @server.route("/add-review", methods=["POST"])
 def add_review():
