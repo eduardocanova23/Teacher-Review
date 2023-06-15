@@ -134,19 +134,29 @@ def get_professors_subjects():
         "subjects": subjects_list
     }
 
+#recebe um json com professor_id
 @server.route("/get-teacher-review", methods=["POST"])
-def get_professors_subjects():
-    request_data =  request.json
+def get_professors_review():
+    request_data = request.json
     subject_table = model.classes.Subject
+    professor_table = model.classes.Professor
+    review_table = model.classes.Review
     teach_table = model.classes.Teach
     subjects_list = []
+    
     with Session(database) as session:
         try:
             results = session.query(
+                review_table.review_id,
+                review_table.report_time,
+                review_table.description,
+                professor_table.professor_id,
                 subject_table.subject_id,
                 subject_table.name,
                 teach_table.teach_id
-            ).join(teach_table, subject_table.subject_id ==  teach_table.subject_id
+            ).join(teach_table, professor_table.professor_id == teach_table.professor_id
+            ).join(subject_table, subject_table.subject_id == teach_table.subject_id
+            ).join(review_table, review_table.teach_id == teach_table.teach_id
             ).filter(teach_table.professor_id == request_data['id']).all()
         except:
             session.rollback()
@@ -156,14 +166,15 @@ def get_professors_subjects():
         
         for sample in results:
             subjects_list.append({
-                'id': sample.subject_id,
-                'teach_id': sample.teach_id,
+                'id': sample.review_id,
+                'description': sample.description,
+                'date': sample.report_time,
                 'name': sample.name
             })
+    
     return {
         "subjects": subjects_list
     }
-
 
 @server.route("/add-review", methods=["POST"])
 def add_review():
