@@ -6,15 +6,19 @@ import './css/App.css';
 import ReviewForm from './Components/Form/ReviewForm'
 import HomeComponent from './Pages/home'
 import ProfComponent from './Pages/Prof'
+import ProfessorScore from './Components/ProfessorScore/ProfessorScore';
+import ProfessorScore2 from './Components/ProfessorScore/ProfessorScore2';
+import ProfessorScoreContainer from './Components/ProfessorScore/ProfessorScoreContainer';
 
 function App() {
   const [page, setPage] = useState(<HomeComponent/>);
+
+  const data = [1, 2, 3, 4, 8, 6]; 
+
   return (
-    <Box>
-      <PermanentDrawerRight page = {page} setPage = {setPage}/>
+    <Box> 
     <div className="App">
-      {/* <ReviewForm></ReviewForm> */}
-      {page}
+      <ProfessorScoreContainer/>
     </div>
     
     </Box>
