@@ -1,0 +1,32 @@
+.item-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* Outras propriedades de estilo para o contêiner principal, se necessário */
+  }
+  
+  .info-container {
+    display: flex;
+    align-items: center;
+    /* Adicione um espaçamento entre as divs */
+    margin-bottom: 8px;
+    justify-content: space-between;
+    /* Outras propriedades de estilo para o contêiner de informações, se necessário */
+  }
+  
+  .materia {
+    /* Estilize a div de matéria como desejado */
+    /* Por exemplo: */
+  }
+  
+  .date {
+    /* Estilize a div de data como desejado */
+    /* Por exemplo: */
+    margin-left: 8px; /* Adicione um espaçamento à esquerda */
+  }
+  
+  .description {
+    /* Estilize a div de descrição como desejado */
+    /* Outras propriedades de estilo para a descrição, se necessário */
+    font-weight: bold;
+  }

@@ -6,26 +6,27 @@ export const useDescription = () => {
     const [reviewList, setReviewList] = React.useState([]);
    
     const handleReviewList = async (newValue) => {
-        if(newValue){
+        if (newValue) {
             const response = await axios.post(
-                config.api_url + '/get-teacher-subjects',
+                
+                config.api_url + '/get-teacher-review',
                 {
-                    "id": newValue["id"]
+                    "id": newValue
                 }
-            )
-            if (response.status == 200) {
-                const subjects = response["data"]["subjects"].map((subj) => {
+            );
+            if (response.status === 200) {
+                const subjects = response.data.subjects.map((subj) => {
                     return {
-                        'id': subj.review_id,
-                        'decription': subj.description,
-                        'date': subj.report_time,
+                        'id': subj.id,
+                        'description': subj.description,
+                        'date': subj.date,
                         'name': subj.name
-                    }
-                })
-                setReviewList(subjects)
+                    };
+                });
+                setReviewList(subjects);
             }
         }
     };
 
-    return {reviewList, handleReviewList};
+    return { reviewList, handleReviewList };
 };

@@ -1,23 +1,30 @@
 import React, { useState, useEffect } from 'react';
 //MUI components
-// import MenuItem from '@mui/material/MenuItem';
-// import MenuList from '@mui/material/MenuList';
-// import Stack from '@mui/material/Stack';
-import {useDescription} from './hooks/useDescription'
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import './css/Item.css'
 
-export default function MenuListComposition({page, setPage,professor_id}) {
-    const {reviewList, handleReviewList} = useDescription();
+export default function DescriptionComponent({description, materia,date}) {
+    const Item = styled(Paper)(({ theme }) => ({
+        backgroundColor:  '#fff',
+        ...theme.typography.body2,
+        padding: theme.spacing(1),
+        textAlign: 'left',
+        color: theme.palette.text.secondary,
+      }));
+    
+    var dataObj = new Date(date);
+    var dataFormatada = dataObj.toLocaleDateString("pt-BR");
 
-    useEffect(() => {
-        handleReviewList(professor_id)    
-    });
-    console.log(reviewList)
-  // get the descriptions 
-  
-  //do a map for the descrition
-
-  // do the mini chat for the descriptions 
   return (
-    <></>
+        <Item style={{paddingBottom : '10px', marginBottom: '10px'}}>  
+            <div className="item-container">
+            <div className="info-container">
+                <div className="materia">{materia}</div>
+                <div className="date">{dataFormatada}</div>
+            </div>
+            <div className="description">{description}</div>
+            </div>
+        </Item>
   );
 }

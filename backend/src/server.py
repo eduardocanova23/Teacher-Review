@@ -117,7 +117,7 @@ def get_professors_subjects():
                 subject_table.name,
                 teach_table.teach_id
             ).join(teach_table, subject_table.subject_id ==  teach_table.subject_id
-            ).filter(teach_table.professor_id == request_data['id']).all()
+            ).filter(teach_table.professor_id == request_data[ "id"]).all()
         except:
             session.rollback()
             raise
