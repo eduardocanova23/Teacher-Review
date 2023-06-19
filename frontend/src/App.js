@@ -6,9 +6,9 @@ import './css/App.css';
 import ReviewForm from './Components/Form/ReviewForm'
 import HomeComponent from './Pages/home'
 import ProfComponent from './Pages/Prof'
-import ProfessorScore from './Components/ProfessorScore/ProfessorScore';
-import ProfessorScore2 from './Components/ProfessorScore/ProfessorScore2';
 import ProfessorScoreContainer from './Components/ProfessorScore/ProfessorScoreContainer';
+import ProfessorSubjectContainer from './Components/ProfessorSubject/ProfessorSubjectContainer';
+import PopularReviewsContainer from './Components/PopularReviews/PopularReviewsContainer';
 
 function App() {
   const [page, setPage] = useState(<HomeComponent/>);
@@ -18,7 +18,7 @@ function App() {
   return (
     <Box> 
     <div className="App">
-      <ProfessorScoreContainer/>
+      <PopularReviewsContainer id={1892}/>
     </div>
     
     </Box>

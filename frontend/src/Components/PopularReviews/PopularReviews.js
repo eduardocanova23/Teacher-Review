@@ -9,8 +9,7 @@ import GradeIcon from '@mui/icons-material/Grade';
 import { PureComponent } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-export default function ProfessorScore(props) {
-  console.log(props.metrics)
+export default function PopularReviews(props) {
 
   let data = [];
 
@@ -35,9 +34,9 @@ export default function ProfessorScore(props) {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
-          width: 200,
-          height: 117,
+          alignItems: 'left',
+          width: 300,
+          height: 60,
           padding: '10px',
           margin: '17px',
           backgroundColor: '#14181C',
@@ -45,24 +44,11 @@ export default function ProfessorScore(props) {
           paddingTop: '5px'
         }}
       >
-        <div style={{ marginBottom: '10px', marginTop: '-10px' }}>
+        <div style={{ marginBottom: '10px', marginTop: '-2px'}}>
           <p>
-            <span style={{ color: '#99AABB', fontSize: '17px' }}>{props.name}</span>
+            <span style={{ color: '#99AABB', fontSize: '17px'}}>{(props.review != null) ? props.review.description : ''}</span>
           </p>
-          <div style={{ borderBottom: '1px solid #99AABB', width: '100%', marginTop: '-10px' }}></div>
-        </div>
-
-        <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
-          <BarChart width={133} height={67} data={data}>
-            <Bar dataKey="value" fill="#445566" />
-          </BarChart>
-          <GradeIcon style={{ color: '#99AABB', fontSize: '17px', marginLeft: '8px'  }} />
-          <p style={{ textAlign: 'center', fontSize: '17px', fontWeight: 'bold', color: '#99AABB', marginLeft: '2px' }}>
-            {sum}
-          </p>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', marginTop: '3px' }}>
-          
+          <div style={{ borderBottom: '4px solid #99AABB', width: '100%', marginTop: '-10px' }}></div>
         </div>
       </Box>
     </>

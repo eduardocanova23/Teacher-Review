@@ -188,7 +188,126 @@ def add_review():
     return {
         "update-professor": request_data['professor_id']
     }
- 
+
+@server.route("/get-teacher-reviews", methods=["POST"])
+def get_professors_reviews():
+    request_data =  request.json
+    review_table = model.classes.Review
+    teach_table = model.classes.Teach
+    subject_table = model.classes.Subject
+    review_list = []
+    with Session(database) as session:
+        try:
+            results = session.query(
+                review_table.review_id,
+                review_table.description,
+                review_table.metric1,
+                review_table.metric2,
+                review_table.metric3,
+                review_table.metric4,
+                review_table.metric5,
+                teach_table.teach_id,
+                subject_table.name
+            ).join(teach_table, review_table.teach_id ==  teach_table.teach_id
+            ).join(subject_table, teach_table.subject_id == subject_table.subject_id     
+            ).filter(teach_table.professor_id == request_data['id']).all()
+        except:
+            session.rollback()
+            raise
+        else:
+            session.commit()
+        
+        for sample in results:
+            review_list.append({
+                'id': sample.review_id,
+                'teach_id': sample.teach_id,
+                'subject_name': sample.name,
+                'description': sample.description,
+                'metric1': sample.metric1,
+                'metric2': sample.metric2,
+                'metric3': sample.metric3,
+                'metric4': sample.metric4,
+                'metric5': sample.metric5
+            })
+    return {
+        "reviews": review_list
+    }
+
+@server.route("/get-all-reviews", methods=["GET"])
+def get_all_reviews():
+    review_table = model.classes.Review
+    teach_table = model.classes.Teach
+    professor_table = model.classes.Professor
+    subject_table = model.classes.Subject
+    review_list = []
+    with Session(database) as session:
+        try:
+            results = session.query(
+                review_table.review_id,
+                review_table.description,
+                review_table.metric1,
+                review_table.metric2,
+                review_table.metric3,
+                review_table.metric4,
+                review_table.metric5,
+                teach_table.teach_id,
+                subject_table.subject_id,
+                subject_table.name#,
+                #professor_table.name
+            ).join(teach_table, review_table.teach_id ==  teach_table.teach_id
+            ).join(subject_table, teach_table.subject_id == subject_table.subject_id
+            ).all()#join(professor_table, teach_table.professor_id == professor_table.professor_id).all()
+        except:
+            session.rollback()
+            raise
+        else:
+            session.commit()
+        
+        for sample in results:
+            review_list.append({
+                'id': sample.review_id,
+                'teach_id': sample.teach_id,
+                'subject_id': sample.subject_id,
+                'subject_name': sample.name,
+                #'professor_name': sample.name,
+                'description': sample.description,
+                'metric1': sample.metric1,
+                'metric2': sample.metric2,
+                'metric3': sample.metric3,
+                'metric4': sample.metric4,
+                'metric5': sample.metric5
+            })
+    return {
+        "reviews": review_list
+    }
+
+@server.route("/get-aasdas-teachers", methods=["GET"])
+def get_teaasdass():
+    teachers = []
+    with Session(database) as session:
+        try:
+            results = session.query(
+                model.classes.Professor
+            ).all()
+        except:
+            session.rollback()
+            raise
+        else:
+            session.commit()
+        
+        for sample in results:
+            teachers.append({
+                "id": sample.professor_id,
+                "name": sample.name,
+                "m1": sample.metric1,
+                "m2": sample.metric2,
+                "m3": sample.metric3,
+                "m4": sample.metric4,
+                "m5": sample.metric5
+            })
+    return {
+        'teacher-list': teachers
+    }   
 
 
 
