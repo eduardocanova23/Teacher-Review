@@ -252,11 +252,12 @@ def get_all_reviews():
                 review_table.metric5,
                 teach_table.teach_id,
                 subject_table.subject_id,
-                subject_table.name#,
-                #professor_table.name
+                subject_table.name,
+                professor_table.professor_id,
+                professor_table.name.label(("professor_name"))
             ).join(teach_table, review_table.teach_id ==  teach_table.teach_id
             ).join(subject_table, teach_table.subject_id == subject_table.subject_id
-            ).all()#join(professor_table, teach_table.professor_id == professor_table.professor_id).all()
+            ).join(professor_table, teach_table.professor_id == professor_table.professor_id).all()
         except:
             session.rollback()
             raise
@@ -269,7 +270,8 @@ def get_all_reviews():
                 'teach_id': sample.teach_id,
                 'subject_id': sample.subject_id,
                 'subject_name': sample.name,
-                #'professor_name': sample.name,
+                'profesor_id': sample.professor_id,
+                'professor_name': sample.professor_name,
                 'description': sample.description,
                 'metric1': sample.metric1,
                 'metric2': sample.metric2,

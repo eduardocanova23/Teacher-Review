@@ -13,12 +13,10 @@ import PopularReviewsContainer from './Components/PopularReviews/PopularReviewsC
 function App() {
   const [page, setPage] = useState(<HomeComponent/>);
 
-  const data = [1, 2, 3, 4, 8, 6]; 
-
   return (
     <Box> 
     <div className="App">
-      <PopularReviewsContainer id={1892}/>
+      <PopularReviewsContainer n={2}/>
     </div>
     
     </Box>

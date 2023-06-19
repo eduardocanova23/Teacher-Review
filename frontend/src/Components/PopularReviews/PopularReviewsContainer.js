@@ -5,7 +5,7 @@ import config from '../../config'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid'
 
-export default function PopularReviewsContainer() {
+export default function PopularReviewsContainer(props) {
 
   const [reviews, getReviews] = useState('');
   useEffect(() => {
@@ -19,9 +19,14 @@ export default function PopularReviewsContainer() {
       config.api_url + '/get-all-reviews'
     )
     .then((response) => {
-      console.log(response.data.reviews)
-      getReviews(response.data.reviews)
+      const topReviews = getTopNReviews(response.data.reviews, props.n)
+      getReviews(topReviews)
     })
+  }
+
+  function getTopNReviews(arr, n) {
+    arr.sort((a, b) => b.id - a.id);
+    return arr.slice(0, n);
   }
   
   const elements = [];
@@ -39,7 +44,7 @@ export default function PopularReviewsContainer() {
   return (
     
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2} columns={5}>
+      <Grid container rowSpacing={0} spacing={0} columns={1}>
         {elements}
       </Grid>
     </Box>
