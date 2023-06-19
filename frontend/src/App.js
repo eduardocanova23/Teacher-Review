@@ -1,9 +1,9 @@
 import './css/App.css';
-import ReviewForm from './components/ReviewForm'
+import FeaturedComponent from './components/FeaturedComponent'
 function App() {
   return (
     <div className="App">
-      <ReviewForm></ReviewForm>
+      <FeaturedComponent></FeaturedComponent>
     </div>
   );
 }
