@@ -7,6 +7,7 @@ import Form from './Pages/Form'
 import HomeComponent from './Pages/home'
 import ProfComponent from './Pages/Prof'
 
+// import FeaturedComponent from './components/FeaturedComponent'
 function App() {
   const [page, setPage] = useState(<HomeComponent/>);
   return (
