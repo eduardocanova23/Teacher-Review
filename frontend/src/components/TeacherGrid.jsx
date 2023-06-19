@@ -29,7 +29,7 @@ const TeacherGrid = () => {
 
 
   return (
-    <div className="teacher-grid"> {/* Apply the teacher-grid class to the container */}
+    <div className="teacher-grid"> {}
     <Grid container spacing={2}>
       {teachers.map((teacher) => (
         <Grid item xs={12} sm={6} md={4} key={teacher.id}>
