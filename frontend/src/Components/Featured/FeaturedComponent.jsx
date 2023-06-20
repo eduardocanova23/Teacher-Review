@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/FeaturedComponent.css';
+import '../../css/FeaturedComponent.css';
 import TeacherGrid from './TeacherGrid';
 
 const FeaturedComponent = () => {

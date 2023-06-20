@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import FeaturedComponent from '../Components/Featured/FeaturedComponent'
 //MUI components
 // import MenuItem from '@mui/material/MenuItem';
 // import MenuList from '@mui/material/MenuList';
@@ -9,6 +9,6 @@ import * as React from 'react';
 export default function HomeComponent() {
 console.log('home chamada')
   return (
-    <div>HOME</div>
+    <FeaturedComponent></FeaturedComponent>
   );
 }

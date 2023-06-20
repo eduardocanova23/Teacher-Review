@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/TeacherCard.css';
+import '../../css/TeacherCard.css';
 
 
 const TeacherCard = ({ teacher, image }) => {
@@ -12,9 +12,8 @@ const TeacherCard = ({ teacher, image }) => {
   return (
     <div className="card">
       <img src={image} alt="Teacher" className="card-image" />
-      <div className="card-content">
-        <h5>{teacher.name}</h5>
-        <button onClick={handleClick}>Adicionar avaliação</button>
+      <div >
+        <h5>{teacher.label}</h5>
       </div>
     </div>
   );
