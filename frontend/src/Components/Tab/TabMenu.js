@@ -17,7 +17,7 @@ export default function MenuListComposition({page, setPage}) {
     spacing={4}>
         <MenuList style={{width: '100%'}}>
           <MenuItem style={{paddingBottom: '10px'}} onClick={() => setPage(<HomeComponent/>)}>Página principal</MenuItem>
-          <MenuItem style={{paddingBottom: '10px'}} onClick={() => setPage(<ProfComponent/>)}>Dashboard</MenuItem>
+          <MenuItem style={{paddingBottom: '10px'}} onClick={() => setPage(<HomeComponent/>)}>Dashboard</MenuItem>
           <MenuItem style={{paddingBottom: '10px'}}  onClick={() => setPage(<Form/>)}>Adicionar Avaliação</MenuItem>
         </MenuList>
       
