@@ -9,7 +9,6 @@ function MainPage() {
   return (
     <>
         <FeaturedComponent></FeaturedComponent>
-        <PopularReviewsContainer n={3}></PopularReviewsContainer>
     </>
    
   );

@@ -50,7 +50,7 @@ export default function ProfessorSubjectContainer(props) {
       paddingTop: '20px'
     }}>
       <span style={{ color: '#787878', fontSize: '17px' , fontWeight: 'bold', marginTop: '-10px', marginBottom: '10px', float: 'left' }}>Disciplinas</span>
-      <Grid container spacing={2} columns={5} style={{justifyContent: 'center'}}>
+      <Grid container spacing={2} columns={5} style={{justifyContent: 'left'}}>
         {elements}
       </Grid>
     </Box>

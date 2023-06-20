@@ -16,8 +16,6 @@ export default function ProfessorSubject(props) {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'left',
-          width: 300,
-          height: 60,
           padding: '10px',
           margin: '17px',
           backgroundColor: '#FFFFFF',

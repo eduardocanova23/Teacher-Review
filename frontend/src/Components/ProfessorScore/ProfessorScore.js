@@ -27,7 +27,7 @@ export default function ProfessorScore(props) {
   
   let sum = data.reduce((total, item) => total + item.value * parseInt(item.name), 0);
   let weights = data.reduce((total, item) => total + item.value, 0);
-  sum = (sum / weights).toFixed(1);
+  sum = (sum / (weights * 2)).toFixed(1);
   
   return (
     <>
