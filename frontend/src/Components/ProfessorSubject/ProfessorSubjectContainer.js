@@ -6,12 +6,12 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid'
 
 export default function ProfessorSubjectContainer(props) {
-
+  const [color, setcolor] = useState('#FF2473');
   const [subjects, getSubjects] = useState('');
   useEffect(() => {
     getAllSubjects()
   }, [])
-
+  console.log(props)
   const teacher_obj = {
     "id": props.id
   }
@@ -31,7 +31,7 @@ export default function ProfessorSubjectContainer(props) {
   for (let i = 0; i < subjects.length; i++) {
       elements.push(
       <Grid item xs={1}>
-        <ProfessorSubject subject={subjects[i]}/>
+        <ProfessorSubject subject={subjects[i]} i = {i} color = {color} />
       </Grid>
       );
   }
@@ -49,7 +49,7 @@ export default function ProfessorSubjectContainer(props) {
       paddingTop: '20px'
     }}>
       <span style={{ color: '#787878', fontSize: '17px' , fontWeight: 'bold', marginTop: '-10px', marginBottom: '10px', float: 'left' }}>Disciplinas</span>
-      <Grid container spacing={2} columns={5}>
+      <Grid container spacing={2} columns={5} style={{justifyContent: 'center'}}>
         {elements}
       </Grid>
     </Box>

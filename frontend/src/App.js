@@ -16,7 +16,7 @@ function App() {
   return (
     <Box> 
     <div className="App">
-      <PopularReviewsContainer n={3}/>
+      <ProfessorSubjectContainer id={1}/>
     </div>
     
     </Box>
