@@ -16,12 +16,16 @@ import image12 from './images/poseidon.PNG';
 import image13 from './images/soldado.PNG';
 import '../../css/TeacherGrid.css';
 import { useProfessorList } from "./hooks/useProfessorLists";
-import { Pagination } from '@mui/material';
+import { useProfessor } from "./hooks/useProfessor";
+
+import { Pagination, Autocomplete, TextField } from '@mui/material';
 
 const TeacherGrid = () => {
-  const { professorsList } = useProfessorList();
+  const { professorsList, filteredList, handleFilter } = useProfessorList();
   const [page, setPage] = React.useState(1);
   const [limits, setlimtis] = React.useState([0, 3]);
+  const {inputProfessor, handleProfessorInput} = useProfessor();
+
   const imagePool = [
     image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11, image12, image13
   ];
@@ -53,8 +57,20 @@ const TeacherGrid = () => {
 
   return (
     <>
+        <Autocomplete
+             value={inputProfessor}
+             onChange={(event, newValue) => {
+                 handleProfessorInput(newValue)
+                 handleFilter(newValue)
+             }}
+             options={professorsList.length > 0? professorsList : []}
+             loading={professorsList.length > 0? false : true}
+             loadingText="Loading..."
+             sx={{ width: '100%', mr: 1}}
+             renderInput={(params) => <TextField {...params} label="Selecione um professor" />}
+         />
       <div style={styles.div}>
-        {professorsList ? professorsList.slice(limits[0], limits[1]).map((teacher) => {
+        {filteredList ? filteredList.slice(limits[0], limits[1]).map((teacher) => {
           return (
             <div style={{width: 200}}>
                  <TeacherCard teacher={teacher} image={getRandomImage()} />
@@ -64,17 +80,9 @@ const TeacherGrid = () => {
         }) :
           <></>
         }
-
-
-        {/* <Grid container spacing={2}>
-        {randomTeachers.map((teacher, index) => (
-          <Grid item xs={12} sm={6} md={4} key={teacher.id}>
-            <TeacherCard teacher={teacher} image={randomImages[index]} />
-          </Grid>
-        ))}
-      </Grid> */}
       </div>
-      <Pagination count={professorsList? Math.ceil(professorsList.length/3) : 0} page={page} onChange={handleChange} />
+      <Pagination count={filteredList? Math.ceil(filteredList.length/3) : 0} page={page} onChange={handleChange} />
+
     </>
   );
 };
