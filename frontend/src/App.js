@@ -16,6 +16,7 @@ function App() {
 
   return (
     <Box> 
+      <PermanentDrawerRight page = {page} setPage = {setPage}/>
     <div className="App">
       {page}
 
