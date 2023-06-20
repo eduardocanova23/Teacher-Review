@@ -1,6 +1,6 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import React, { useEffect, useState } from 'react';
+
 
 export default function ProfessorSubject(props) {
   const [teachColor, setTeachColor] = useState('');
@@ -31,6 +31,7 @@ export default function ProfessorSubject(props) {
           </p>
           <div style={{ borderBottom: teachColor, width: '100%', marginTop: '-10px' }}></div>
         </div>
+        
       </Box>
     </>
   );

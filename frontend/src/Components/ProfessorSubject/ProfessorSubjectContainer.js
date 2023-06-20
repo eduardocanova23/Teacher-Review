@@ -4,9 +4,10 @@ import axios from "axios";
 import config from '../../config'
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid'
+import DescriptionMap from '../Professor/DescriptionMap'
 
 export default function ProfessorSubjectContainer(props) {
-  const [color, setcolor] = useState('#FF2473');
+  const [colorTech, setcolorTech] = useState([0,0]);
   const [subjects, getSubjects] = useState('');
   useEffect(() => {
     getAllSubjects()
@@ -31,13 +32,13 @@ export default function ProfessorSubjectContainer(props) {
   for (let i = 0; i < subjects.length; i++) {
       elements.push(
       <Grid item xs={1}>
-        <ProfessorSubject subject={subjects[i]} i = {i} color = {color} />
+        <ProfessorSubject subject={subjects[i]} i = {i}  colorTech = {colorTech} reviewList = {props.reviewList}/>
       </Grid>
       );
   }
 
   return (
-    
+    <>
     <Box sx={{
       display: 'flex',
       flexDirection: 'column',
@@ -53,6 +54,8 @@ export default function ProfessorSubjectContainer(props) {
         {elements}
       </Grid>
     </Box>
-    
+
+    <DescriptionMap reviewList ={props.reviewList}/>
+    </>
   );
 }

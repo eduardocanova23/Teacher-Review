@@ -10,7 +10,7 @@ const Item = styled(Paper)(({ theme }) => ({
   backgroundColor:  '#EEF2F5',
   padding: theme.spacing(4),
 }));
-export default function DescriptionMap({professor_id, reviewList}) {
+export default function DescriptionMap({reviewList}) {
 
   return (
     <><Item style={{  maxHeight: '400px',
