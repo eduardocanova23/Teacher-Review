@@ -16,7 +16,7 @@ function App() {
   return (
     <Box> 
     <div className="App">
-      <PopularReviewsContainer n={2}/>
+      <PopularReviewsContainer n={3}/>
     </div>
     
     </Box>

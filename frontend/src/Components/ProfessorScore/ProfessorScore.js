@@ -40,24 +40,24 @@ export default function ProfessorScore(props) {
           height: 117,
           padding: '10px',
           margin: '17px',
-          backgroundColor: '#14181C',
+          backgroundColor: '#FFFFFF',
           borderRadius: '17px',
           paddingTop: '5px'
         }}
       >
         <div style={{ marginBottom: '10px', marginTop: '-10px' }}>
           <p>
-            <span style={{ color: '#99AABB', fontSize: '17px' }}>{props.name}</span>
+            <span style={{ color: '#727272', fontSize: '17px' , fontWeight: 'bold'}}>{props.name}</span>
           </p>
-          <div style={{ borderBottom: '1px solid #99AABB', width: '100%', marginTop: '-10px' }}></div>
+          <div style={{ borderBottom: '1px solid #727272', width: '100%', marginTop: '-10px' }}></div>
         </div>
 
         <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
           <BarChart width={133} height={67} data={data}>
-            <Bar dataKey="value" fill="#445566" />
+            <Bar dataKey="value" fill="#40A737" />
           </BarChart>
-          <GradeIcon style={{ color: '#99AABB', fontSize: '17px', marginLeft: '8px'  }} />
-          <p style={{ textAlign: 'center', fontSize: '17px', fontWeight: 'bold', color: '#99AABB', marginLeft: '2px' }}>
+          <GradeIcon style={{ color: '#282828', fontSize: '17px', marginLeft: '8px'  }} />
+          <p style={{ textAlign: 'center', fontSize: '17px', fontWeight: 'bold', color: '#282828', marginLeft: '2px' }}>
             {sum}
           </p>
         </div>

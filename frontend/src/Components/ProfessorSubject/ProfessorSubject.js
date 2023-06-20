@@ -39,16 +39,16 @@ export default function ProfessorSubject(props) {
           height: 60,
           padding: '10px',
           margin: '17px',
-          backgroundColor: '#14181C',
+          backgroundColor: '#FFFFFF',
           borderRadius: '17px',
           paddingTop: '5px'
         }}
       >
         <div style={{ marginBottom: '10px', marginTop: '-2px'}}>
           <p>
-            <span style={{ color: '#99AABB', fontSize: '17px', fontWeight: 'bold'}}>{(props.subject != null) ? props.subject.name : ''}</span>
+            <span style={{ color: '#282828', fontSize: '17px', fontWeight: 'bold'}}>{(props.subject != null) ? props.subject.name : ''}</span>
           </p>
-          <div style={{ borderBottom: '4px solid #99AABB', width: '100%', marginTop: '-10px' }}></div>
+          <div style={{ borderBottom: '4px solid #40A737', width: '100%', marginTop: '-10px' }}></div>
         </div>
       </Box>
     </>

@@ -43,7 +43,17 @@ export default function PopularReviewsContainer(props) {
 
   return (
     
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      padding: '10px',
+      margin: '17px',
+      backgroundColor: '#EEF2F5',
+      borderRadius: '17px',
+      paddingTop: '20px'
+    }}>
+      <span style={{ color: '#787878', fontSize: '17px' , fontWeight: 'bold', marginTop: '-10px', marginBottom: '10px', float: 'left' }}>Últimas avaliações</span>
       <Grid container rowSpacing={0} spacing={0} columns={1}>
         {elements}
       </Grid>

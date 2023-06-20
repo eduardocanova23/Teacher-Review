@@ -38,7 +38,17 @@ export default function ProfessorSubjectContainer(props) {
 
   return (
     
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      padding: '10px',
+      margin: '17px',
+      backgroundColor: '#EEF2F5',
+      borderRadius: '17px',
+      paddingTop: '20px'
+    }}>
+      <span style={{ color: '#787878', fontSize: '17px' , fontWeight: 'bold', marginTop: '-10px', marginBottom: '10px', float: 'left' }}>Disciplinas</span>
       <Grid container spacing={2} columns={5}>
         {elements}
       </Grid>
