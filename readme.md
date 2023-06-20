@@ -4,6 +4,15 @@
 
 O projeto está no contexto da disciplina de Programação Avançada e tem como objetivo principal a criação de uma Aplicação Web que resolva um problema real, utilizando tanto os princípios SOLID quanto os padrões de projeto estudados em aula. 
 
+#### Como Executar o código
+
+Para executar, é necessário renomear a pasta "example.env" para apenas ".env". Em seguida, é preciso lenvantar o container, utilizando o Docker. Basta executar o comando abaixo no diretório raiz do projeto: 
+
+```
+    docker compose up --build
+```
+
+
 ### Problema x Solução
   Atualmente, a taxa de evasão nos cursos de engenharia na UFRJ é extremamente alta. Isso se dá por diversos motivos, seja pelo despreparo dos calouros em relação a matemática básica, pelo choque causado pelo ciclo básico ou pela insatisfação dos alunos com os professores. Além disso, não existe um bom canal de feedback entre os alunos e professores para que os estes tenham noção de como suas aulas estão sendo recebidas pelos alunos e quais aspectos devem ser melhorados para potencializar o aprendizado.
 
@@ -42,4 +51,3 @@ O **Frontend** da aplicação tem como papel ser a interface visual em que o usu
 #### Controle de Versão
 
 Com o intuito de organizar a produção do código pelos integrantes, criamos um repositório **Git** e hospedamos na plataforma **GitHub**. O  **Git** é uma tecnologia de  versionamento que possibilita a criação de ramificações (**branches**) do código que podem ser mescladas de forma controlada. Essa propriedade é importante para paralelizar a programação do trabalho.
-
