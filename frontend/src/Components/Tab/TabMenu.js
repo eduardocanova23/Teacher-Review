@@ -5,6 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 import HomeComponent from '../../Pages/home';
+import Form from '../../Pages/Form'
 import ProfComponent from '../../Pages/Prof';
 
 export default function MenuListComposition({page, setPage}) {
@@ -17,9 +18,9 @@ export default function MenuListComposition({page, setPage}) {
     spacing={4}>
         <MenuList style={{width: '100%'}}>
           <MenuItem style={{paddingBottom: '10px'}} onClick={() => setPage(<HomeComponent/>)}>Página principal</MenuItem>
-          <MenuItem style={{paddingBottom: '10px'}} onClick={() =>setPage(<ProfComponent/>)}>Avaliação</MenuItem>
+          {/* <MenuItem style={{paddingBottom: '10px'}} onClick={() => setPage(<ProfComponent/>)}>Avaliação</MenuItem> */}
           <MenuItem style={{paddingBottom: '10px'}}>Dashboard</MenuItem>
-          <MenuItem style={{paddingBottom: '10px'}}>Adicionar Avaliação</MenuItem>
+          <MenuItem style={{paddingBottom: '10px'}}  onClick={() => setPage(<Form/>)}>Adicionar Avaliação</MenuItem>
         </MenuList>
       
         

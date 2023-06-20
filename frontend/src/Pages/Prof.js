@@ -1,14 +1,17 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
+import DescriptionMap from '../Components/Professor/DescriptionMap'
+import {useDescription} from '../Components/Professor/hooks/useDescription'
 
-//MUI components
-// import MenuItem from '@mui/material/MenuItem';
-// import MenuList from '@mui/material/MenuList';
-// import Stack from '@mui/material/Stack';
-// import PermanentDrawerRight from './LeftDrower';
 
 export default function ProfComponent() {
-  console.log('Prof chamada')
+  const id = 1;
+  const {reviewList, handleReviewList} = useDescription();
+
+  useEffect(() => {
+    handleReviewList(id);
+  }, []);
+  
   return (
-    <div>ProfComponent</div>
+    <DescriptionMap professor_id={id} reviewList = {reviewList}/> 
   );
 }
