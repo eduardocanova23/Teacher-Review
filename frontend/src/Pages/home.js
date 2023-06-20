@@ -1,10 +1,10 @@
 import * as React from 'react';
 import FeaturedComponent from '../Components/Featured/FeaturedComponent'
 import ProfessorDetail from '../Components/Professor/ProfessorDetails';
-import {  BrowserRouter as Router,
-  Routes,
-  Route,
-  useRoutes, } from "react-router-dom";
+// import {  BrowserRouter as Router,
+//   Routes,
+//   Route,
+//   useRoutes, } from "react-router-dom";
 //MUI components
 // import MenuItem from '@mui/material/MenuItem';
 // import MenuList from '@mui/material/MenuList';
