@@ -1,5 +1,5 @@
 import * as React from 'react';
-import FeaturedComponent from '../Components/Featured/FeaturedComponent'
+import MainPage from '../Components/Home/MainPage'
 import ProfessorDetail from '../Components/Professor/ProfessorDetails';
 import {  BrowserRouter as Router,
   Routes,
@@ -14,7 +14,7 @@ import {  BrowserRouter as Router,
 
 const Home = () => {
   let routes = useRoutes([
-    { path: "/", element: <FeaturedComponent /> },
+    { path: "/", element: <MainPage /> },
     { path: "/professors/:professorId", element: <ProfessorDetail /> },
     // ...
   ]);
